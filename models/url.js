@@ -7,7 +7,7 @@ const urlSchema = new Schema ({
   },
   suffix: {
     type: String,
-    trquried: true
+    requried: true
   }
 })
 
