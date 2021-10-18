@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const Url = require('./models/url')
+const Utility = require('./utility')
 
 const app = express()
 const PORT = 3000
@@ -42,12 +43,7 @@ app.post('/urls', (req, res) =>{
       }
       // 產生短網址
       else  {
-          const collection = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz0123456789'
-          let suffix = ''
-          for (let i = 0; i < 5; i++) {
-            const randomIndex = Math.floor(Math.random() * collection.length)
-            suffix += collection[randomIndex]
-          } 
+          const suffix = Utility.suffixGenerator()
           Url.create({ url: input, suffix: suffix })
           shortenedUrl = domain + suffix
         }
