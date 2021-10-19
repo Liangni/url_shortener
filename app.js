@@ -34,8 +34,14 @@ app.get('/', (req, res) => {
 // 設定產生短網址
 app.post('/urls', (req, res) =>{
   let input = req.body.input.trim()
-
   let shortenedUrl = ''
+  
+  // 例外處理: 去除使用者輸入網址結尾的"/"，統一相同url儲存格式
+  const lastIndex = input.length - 1
+  if (input[lastIndex] === '/') {
+    input = input.slice(0, -1)
+  }
+
   return Url.findOne({ url:input, $options:"i" })
     .lean()
     .then( url => {
