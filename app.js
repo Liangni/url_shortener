@@ -33,14 +33,17 @@ app.get('/', (req, res) => {
 
 // 設定產生短網址
 app.post('/urls', (req, res) =>{
-  const input = req.body.input.trim()
+  let input = req.body.input.trim()
+
   let shortenedUrl = ''
   return Url.findOne({ url:input, $options:"i" })
     .then( url => {
+      
       // 例外處理: 輸入相同網址時，產生一樣的縮址
       if (url) {
         shortenedUrl = domain + url.suffix
       }
+      
       // 產生短網址
       else  {
           const suffix = Utility.suffixGenerator()
@@ -50,6 +53,19 @@ app.post('/urls', (req, res) =>{
     })
     .then(() => {
       res.render('index', { shortenedUrl })
+    })
+    .catch(error => {
+      console.log(error)
+    })
+})
+
+// 設定轉址路由
+app.get('/:suffix', (req, res) => {
+  const suffix = req.params.suffix
+  return Url.findOne({ suffix })
+    .lean()
+    .then(url => {
+      res.redirect(url.url)
     })
     .catch(error => {
       console.log(error)
