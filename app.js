@@ -37,6 +37,7 @@ app.post('/urls', (req, res) =>{
 
   let shortenedUrl = ''
   return Url.findOne({ url:input, $options:"i" })
+    .lean()
     .then( url => {
       
       // 例外處理: 輸入相同網址時，產生一樣的縮址
