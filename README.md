@@ -29,8 +29,8 @@ npm install
 ```
 npm run seed
 ```
-5. 在終端機輸入下方指令啟動專案
+5. 啟動專案
 ```
 npm run dev
 ```
-6. 當終端機出現App is running on https://localhost:3000，即可以在瀏覽器輸入http://localhost:3000/ 開始使用網站
+6. 待終端機出現`App is running on https://localhost:3000`，即可以在瀏覽器輸入http://localhost:3000/ 開始使用服務
