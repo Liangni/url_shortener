@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Url = require('../../models/url')
+const Utility = require('../../utility')
 
 const domain = `http://localhost:3000/urls/`
 
